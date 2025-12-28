@@ -1,11 +1,22 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const Groq = require("groq-sdk");
 
 class LLMService {
   constructor() {
-    this.genAI = new GoogleGenerativeAI(process.env.LLM_API_KEY);
-    this.model = this.genAI.getGenerativeModel({
-      model: process.env.LLM_MODEL || "gemini-1.5-flash",
-    });
+    this.provider = process.env.LLM_PROVIDER || "gemini";
+    this.model = process.env.LLM_MODEL;
+    this.apiKey = process.env.LLM_API_KEY;
+
+    if (this.provider === "groq") {
+      this.groqClient = new Groq({
+        apiKey: this.apiKey,
+      });
+    } else if (this.provider === "gemini") {
+      this.genAI = new GoogleGenerativeAI(this.apiKey);
+      this.geminiModel = this.genAI.getGenerativeModel({
+        model: this.model || "gemini-1.5-flash",
+      });
+    }
   }
 
   async generateHint(assignmentContext, userQuery, hintLevel = 1) {
@@ -17,11 +28,15 @@ class LLMService {
         hintLevel
       );
 
-      const prompt = `${systemPrompt}\n\n${userPrompt}`;
+      let hint;
 
-      const result = await this.model.generateContent(prompt);
-      const response = result.response;
-      const hint = await response.text();
+      if (this.provider === "groq") {
+        hint = await this.generateHintWithGroq(systemPrompt, userPrompt);
+      } else if (this.provider === "gemini") {
+        hint = await this.generateHintWithGemini(systemPrompt, userPrompt);
+      } else {
+        throw new Error(`Unsupported LLM provider: ${this.provider}`);
+      }
 
       if (!hint) {
         throw new Error("No hint generated");
@@ -31,6 +46,8 @@ class LLMService {
         success: true,
         hint,
         level: hintLevel,
+        provider: this.provider,
+        model: this.model,
         timestamp: new Date().toISOString(),
       };
     } catch (error) {
@@ -42,6 +59,33 @@ class LLMService {
         fallbackHint: this.getFallbackHint(hintLevel),
       };
     }
+  }
+
+  async generateHintWithGroq(systemPrompt, userPrompt) {
+    const completion = await this.groqClient.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: systemPrompt,
+        },
+        {
+          role: "user",
+          content: userPrompt,
+        },
+      ],
+      model: this.model || "llama-3.3-70b-versatile",
+      temperature: 0.7,
+      max_tokens: 500,
+    });
+
+    return completion.choices[0]?.message?.content || "";
+  }
+
+  async generateHintWithGemini(systemPrompt, userPrompt) {
+    const prompt = `${systemPrompt}\n\n${userPrompt}`;
+    const result = await this.geminiModel.generateContent(prompt);
+    const response = result.response;
+    return await response.text();
   }
 
   buildSystemPrompt() {

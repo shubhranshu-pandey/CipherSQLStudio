@@ -18,7 +18,7 @@ An interactive SQL learning platform that helps users practice and master SQL th
 
 - 📚 **SQL Assignments**: Structured SQL challenges from Easy to Hard difficulty
 - 🔄 **Real-time Query Execution**: Execute SQL queries in a sandboxed PostgreSQL environment
-- 🤖 **AI-Powered Hints**: Get intelligent hints powered by Google Gemini AI
+- 🤖 **AI-Powered Hints**: Get intelligent hints powered by Groq AI (Llama 3.3) or Google Gemini
 - 📊 **Progress Tracking**: Track your learning progress and attempt history
 - 🎯 **Interactive SQL Editor**: Monaco-based SQL editor with syntax highlighting
 - 🔐 **User Authentication**: Secure JWT-based authentication
@@ -42,7 +42,7 @@ An interactive SQL learning platform that helps users practice and master SQL th
 - MongoDB Atlas (User data, assignments, progress)
 - PostgreSQL (SQL execution sandbox)
 - JWT Authentication
-- Google Gemini AI (Hints)
+- Groq AI / Google Gemini AI (Hints)
 - Helmet, CORS, Rate Limiting
 
 ## 📦 Prerequisites
@@ -53,7 +53,8 @@ Before you begin, ensure you have the following installed:
 - **npm** (comes with Node.js)
 - **Docker** & **Docker Compose** - [Download](https://www.docker.com/products/docker-desktop)
 - **MongoDB Atlas Account** - [Sign up](https://www.mongodb.com/cloud/atlas)
-- **Google Gemini API Key** (optional, for hints) - [Get API Key](https://makersuite.google.com/app/apikey)
+- **Groq API Key** (recommended, for hints) - [Get API Key](https://console.groq.com/)
+- **Google Gemini API Key** (alternative option) - [Get API Key](https://makersuite.google.com/app/apikey)
 
 ## 🚀 Getting Started
 
@@ -136,10 +137,15 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/sqlstudio_sandbox
 
-# LLM Configuration (Google Gemini)
-LLM_API_KEY=your_gemini_api_key_here
-LLM_PROVIDER=gemini
-LLM_MODEL=gemini-1.5-flash
+# LLM Configuration (Groq - Recommended)
+LLM_API_KEY=your_groq_api_key_here
+LLM_PROVIDER=groq
+LLM_MODEL=llama-3.3-70b-versatile
+
+# Alternative: Google Gemini
+# LLM_API_KEY=your_gemini_api_key_here
+# LLM_PROVIDER=gemini
+# LLM_MODEL=gemini-1.5-flash
 
 # Security
 JWT_SECRET=your_jwt_secret_key_here
@@ -158,6 +164,50 @@ Create a `.env` file in the `frontend/` directory:
 VITE_API_URL=http://localhost:5002/api
 VITE_APP_NAME=CipherSQLStudio
 VITE_VERSION=1.0.0
+```
+
+### LLM Provider Configuration
+
+The platform supports multiple LLM providers for AI-powered hints:
+
+#### Groq (Recommended - Fast & Free Tier Available)
+
+**Available Models:**
+
+- `llama-3.3-70b-versatile` (Recommended - Fast & powerful)
+- `llama-3.1-70b-versatile`
+- `llama-3.1-8b-instant` (Faster, lighter)
+- `mixtral-8x7b-32768` (Good for long context)
+- `gemma2-9b-it`
+
+**Setup:**
+
+1. Get your API key from [console.groq.com](https://console.groq.com/)
+2. Set in `.env`:
+
+```env
+LLM_API_KEY=gsk_your_groq_api_key
+LLM_PROVIDER=groq
+LLM_MODEL=llama-3.3-70b-versatile
+```
+
+#### Google Gemini (Alternative)
+
+**Available Models:**
+
+- `gemini-1.5-flash` (Fast)
+- `gemini-1.5-pro` (More capable)
+- `gemma-2-9b-it` (Open source)
+
+**Setup:**
+
+1. Get your API key from [makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey)
+2. Set in `.env`:
+
+```env
+LLM_API_KEY=your_gemini_api_key
+LLM_PROVIDER=gemini
+LLM_MODEL=gemini-1.5-flash
 ```
 
 ## 🏃 Running the Project
