@@ -393,30 +393,4 @@ lsof -ti:5173 | xargs kill -9
 # PostgreSQL (port 5432)
 lsof -ti:5432 | xargs kill -9
 ```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 👨‍💻 Author
-
-**CipherSQLStudio Team**
-
-## 🙏 Acknowledgments
-
-- Google Gemini AI for intelligent hints
-- MongoDB Atlas for database hosting
-- Vercel for deployment platform
-- All contributors and supporters
-
----
-
-**Happy Learning! 🎉**
+- This is a Assignment Made for CipherSchool 
