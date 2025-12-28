@@ -26,8 +26,11 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? ["https://your-frontend-domain.com"]
-        : ["http://localhost:3002"],
+        ? [
+            "https://cipher-sql-studio-lac.vercel.app",
+            process.env.FRONTEND_URL,
+          ].filter(Boolean)
+        : ["http://localhost:3002", "http://localhost:3000", "http://localhost:5173"],
     credentials: true,
   })
 );
