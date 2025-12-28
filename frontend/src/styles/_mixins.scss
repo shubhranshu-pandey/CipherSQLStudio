@@ -1,0 +1,406 @@
+@use "variables" as *;
+
+// Mobile-first responsive breakpoints (min-width approach)
+@mixin mobile-up {
+  @media (min-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin large-up {
+  @media (min-width: $breakpoint-large) {
+    @content;
+  }
+}
+
+// Max-width breakpoints for mobile-first overrides
+@mixin mobile-only {
+  @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (min-width: $breakpoint-tablet) and (max-width: #{$breakpoint-desktop - 1px}) {
+    @content;
+  }
+}
+
+// Legacy mixins for backward compatibility
+@mixin mobile {
+  @include mobile-up {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @include tablet-up {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include desktop-up {
+    @content;
+  }
+}
+
+@mixin large {
+  @include large-up {
+    @content;
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Touch-friendly button styles with mobile-first approach
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: $touch-target-min; // Touch-friendly minimum height
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $border-radius-md;
+  font-family: $font-family-primary;
+  font-size: $font-size-base; // Larger base size for mobile
+  font-weight: $font-weight-medium;
+  line-height: $line-height-tight;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  touch-action: manipulation; // Prevents double-tap zoom on mobile
+
+  // Mobile-first: larger touch targets
+  @include mobile-only {
+    min-height: 48px; // Even larger for small screens
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+
+  // Tablet and up: refined sizing
+  @include tablet-up {
+    min-height: $touch-target-min;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
+
+  // Touch feedback
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: $primary-color;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: $primary-dark;
+  }
+
+  &:active:not(:disabled) {
+    background-color: $primary-dark;
+    transform: scale(0.98);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: transparent;
+  color: $text-primary;
+  border: 1px solid $border-color;
+
+  &:hover:not(:disabled) {
+    background-color: $background-color;
+    border-color: $secondary-color;
+  }
+
+  &:active:not(:disabled) {
+    background-color: rgba($secondary-color, 0.1);
+    transform: scale(0.98);
+  }
+}
+
+@mixin button-danger {
+  @include button-base;
+  background-color: $error-color;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: darken($error-color, 10%);
+  }
+
+  &:active:not(:disabled) {
+    background-color: darken($error-color, 15%);
+    transform: scale(0.98);
+  }
+}
+
+// Card styles
+@mixin card {
+  background-color: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+  padding: $spacing-lg;
+}
+
+@mixin card-hover {
+  @include card;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}
+
+// Text utilities
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Loading states
+@mixin skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Difficulty badges
+@mixin difficulty-badge($color) {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  background-color: rgba($color, 0.1);
+  color: $color;
+  border: 1px solid rgba($color, 0.2);
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+// Panel styles
+@mixin panel {
+  background-color: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+}
+
+@mixin panel-header {
+  padding: $spacing-md $spacing-lg;
+  background-color: $background-color;
+  border-bottom: 1px solid $border-color;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+}
+
+@mixin panel-content {
+  padding: $spacing-lg;
+}
+
+// Scrollbar styles
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+    border-radius: $border-radius-sm;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $secondary-color;
+    border-radius: $border-radius-sm;
+
+    &:hover {
+      background: $secondary-dark;
+    }
+  }
+}
+
+// Touch-friendly form inputs
+@mixin input-base {
+  font-family: inherit;
+  font-size: $font-size-base;
+  line-height: inherit;
+  color: $text-primary;
+  background-color: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-md;
+  min-height: $touch-target-min;
+  padding: $spacing-md;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  touch-action: manipulation;
+
+  // Mobile-first: larger touch targets
+  @include mobile-only {
+    min-height: 48px;
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+
+  // Tablet and up: refined sizing
+  @include tablet-up {
+    min-height: $touch-target-min;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-base;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: rgba($border-color, 0.1);
+  }
+}
+
+// Touch-friendly navigation
+@mixin nav-link {
+  display: flex;
+  align-items: center;
+  min-height: $touch-target-min;
+  padding: $spacing-sm $spacing-md;
+  color: $text-primary;
+  text-decoration: none;
+  border-radius: $border-radius-md;
+  transition: all 0.2s ease-in-out;
+  touch-action: manipulation;
+
+  // Mobile-first: larger touch targets
+  @include mobile-only {
+    min-height: 48px;
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+
+  &:hover {
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &--active {
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+    font-weight: $font-weight-medium;
+  }
+}
+
+// Mobile-first grid system
+@mixin grid-container {
+  display: grid;
+  gap: $spacing-md;
+  
+  // Mobile-first: single column
+  grid-template-columns: 1fr;
+  
+  @include tablet-up {
+    gap: $spacing-lg;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  @include desktop-up {
+    gap: $spacing-xl;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+// Mobile-first card layouts
+@mixin card-mobile-first {
+  background-color: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  box-shadow: $shadow-sm;
+  
+  // Mobile-first: full width with minimal padding
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  
+  @include tablet-up {
+    padding: $spacing-lg;
+    margin-bottom: $spacing-lg;
+  }
+  
+  @include desktop-up {
+    padding: $spacing-xl;
+  }
+}

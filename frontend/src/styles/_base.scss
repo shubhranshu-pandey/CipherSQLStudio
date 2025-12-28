@@ -1,0 +1,229 @@
+@use "globals" as *;
+
+// Mobile-first base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  // Prevent zoom on input focus in iOS
+  -webkit-text-size-adjust: 100%;
+  // Smooth scrolling
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: $font-family-primary;
+  // Mobile-first typography
+  font-size: $font-size-lg; // Larger base size for mobile
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background-color: $background-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  // Prevent horizontal scroll on mobile
+  overflow-x: hidden;
+  
+  // Tablet and up: refined typography
+  @include tablet-up {
+    font-size: $font-size-base;
+  }
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app__main {
+  flex: 1;
+}
+
+// Touch-friendly links
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  // Minimum touch target for inline links
+  min-height: $touch-target-min;
+  display: inline-flex;
+  align-items: center;
+  touch-action: manipulation;
+
+  &:hover {
+    color: $primary-dark;
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+    border-radius: $border-radius-sm;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Mobile-first headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $text-primary;
+  margin-bottom: $spacing-md;
+}
+
+// Mobile-first heading sizes
+h1 {
+  font-size: $font-size-3xl; // Smaller on mobile
+  
+  @include tablet-up {
+    font-size: $font-size-4xl;
+  }
+}
+
+h2 {
+  font-size: $font-size-2xl;
+  
+  @include tablet-up {
+    font-size: $font-size-3xl;
+  }
+}
+
+h3 {
+  font-size: $font-size-xl;
+  
+  @include tablet-up {
+    font-size: $font-size-2xl;
+  }
+}
+
+h4 {
+  font-size: $font-size-lg;
+  
+  @include tablet-up {
+    font-size: $font-size-xl;
+  }
+}
+
+h5 {
+  font-size: $font-size-base;
+  
+  @include tablet-up {
+    font-size: $font-size-lg;
+  }
+}
+
+h6 {
+  font-size: $font-size-sm;
+  
+  @include tablet-up {
+    font-size: $font-size-base;
+  }
+}
+
+// Paragraphs
+p {
+  margin-bottom: $spacing-md;
+}
+
+// Lists
+ul,
+ol {
+  margin-bottom: $spacing-md;
+  padding-left: $spacing-xl;
+}
+
+li {
+  margin-bottom: $spacing-xs;
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Touch-friendly buttons
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  touch-action: manipulation;
+  
+  // Minimum touch target
+  min-height: $touch-target-min;
+  
+  &:focus {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+}
+
+// Touch-friendly form elements
+input,
+textarea,
+select {
+  @include input-base;
+}
+
+// Mobile-first container
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  
+  // Mobile-first: minimal padding
+  padding: 0 $spacing-md;
+  
+  @include tablet-up {
+    padding: 0 $spacing-lg;
+  }
+  
+  @include desktop-up {
+    padding: 0 $spacing-xl;
+  }
+}
+
+// Scrollbar styling (webkit browsers)
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $surface-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-color;
+  border-radius: $border-radius-sm;
+
+  &:hover {
+    background: $text-muted;
+  }
+}

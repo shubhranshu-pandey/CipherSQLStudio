@@ -1,0 +1,25 @@
+@use "../../styles/globals" as *;
+
+.difficulty-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid;
+
+  &--easy {
+    @include difficulty-badge($difficulty-easy);
+  }
+
+  &--medium {
+    @include difficulty-badge($difficulty-medium);
+  }
+
+  &--hard {
+    @include difficulty-badge($difficulty-hard);
+  }
+}

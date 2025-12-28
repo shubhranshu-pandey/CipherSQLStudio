@@ -1,0 +1,92 @@
+@use "../../../styles/globals" as *;
+
+.attempts-summary {
+  @include card;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__label {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__number {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+
+    &--correct {
+      background-color: rgba($success-color, 0.1);
+      color: $success-color;
+    }
+
+    &--incorrect {
+      background-color: rgba($error-color, 0.1);
+      color: $error-color;
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-xs $spacing-md;
+    background-color: transparent;
+    color: $primary-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.05);
+      border-color: $primary-color;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+  }
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__info {
+      width: 100%;
+    }
+
+    &__link {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+

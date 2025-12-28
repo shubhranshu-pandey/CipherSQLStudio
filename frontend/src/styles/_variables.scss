@@ -1,0 +1,87 @@
+// Colors - Black theme with subtle accents
+$primary-color: #000000; // Black as primary color
+$primary-dark: #1a1a1a;
+$primary-light: #333333;
+
+$secondary-color: #666666;
+$secondary-dark: #333333;
+$secondary-light: #999999;
+
+$success-color: #10b981; // Keep green for success
+$warning-color: #f59e0b; // Keep amber for warning
+$error-color: #ef4444; // Keep red for error
+$info-color: #000000; // Black for info
+
+$background-color: #ffffff;
+$surface-color: #ffffff;
+$border-color: #e5e5e5;
+$text-primary: #000000;
+$text-secondary: #666666;
+$text-muted: #999999;
+
+// Difficulty Colors - Subtle colors
+$difficulty-easy: #10b981; // Green
+$difficulty-medium: #f59e0b; // Amber
+$difficulty-hard: #ef4444; // Red
+
+// Mobile-first breakpoints (min-width approach)
+$breakpoint-mobile: 320px;   // Small mobile devices
+$breakpoint-tablet: 641px;   // Tablets and large mobile
+$breakpoint-desktop: 1024px; // Desktop and laptops
+$breakpoint-large: 1281px;   // Large screens
+
+// Touch-friendly sizing
+$touch-target-min: 44px;     // Minimum touch target size
+$touch-spacing: 12px;        // Minimum spacing between touch targets
+
+// Spacing
+$spacing-xs: 0.25rem;   // 4px
+$spacing-sm: 0.5rem;    // 8px
+$spacing-md: 1rem;      // 16px
+$spacing-lg: 1.5rem;    // 24px
+$spacing-xl: 2rem;      // 32px
+$spacing-2xl: 3rem;     // 48px
+$spacing-3xl: 4rem;     // 64px
+
+// Typography
+$font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+$font-family-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+
+$font-size-xs: 0.75rem;   // 12px
+$font-size-sm: 0.875rem;  // 14px
+$font-size-base: 1rem;    // 16px
+$font-size-lg: 1.125rem;  // 18px
+$font-size-xl: 1.25rem;   // 20px
+$font-size-2xl: 1.5rem;   // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem;  // 36px
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// Border Radius
+$border-radius-sm: 0.25rem;  // 4px
+$border-radius-md: 0.375rem; // 6px
+$border-radius-lg: 0.5rem;   // 8px
+$border-radius-xl: 0.75rem;  // 12px
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Z-index
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;

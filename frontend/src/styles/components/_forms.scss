@@ -1,0 +1,279 @@
+@use "../globals" as *;
+
+// BEM Form Components
+// Mobile-first, touch-friendly form styles
+
+// Form block
+.form {
+  &__group {
+    margin-bottom: $spacing-lg;
+    
+    @include mobile-only {
+      margin-bottom: $spacing-xl;
+    }
+  }
+  
+  &__label {
+    display: block;
+    margin-bottom: $spacing-sm;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    font-size: $font-size-base;
+    
+    @include mobile-only {
+      font-size: $font-size-lg;
+      margin-bottom: $spacing-md;
+    }
+    
+    &--required {
+      &::after {
+        content: ' *';
+        color: $error-color;
+      }
+    }
+  }
+  
+  &__input {
+    @include input-base;
+    width: 100%;
+    
+    &--error {
+      border-color: $error-color;
+      
+      &:focus {
+        border-color: $error-color;
+        box-shadow: 0 0 0 3px rgba($error-color, 0.1);
+      }
+    }
+    
+    &--success {
+      border-color: $success-color;
+      
+      &:focus {
+        border-color: $success-color;
+        box-shadow: 0 0 0 3px rgba($success-color, 0.1);
+      }
+    }
+  }
+  
+  &__textarea {
+    @include input-base;
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    
+    @include mobile-only {
+      min-height: 140px;
+    }
+  }
+  
+  &__select {
+    @include input-base;
+    width: 100%;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right $spacing-sm center;
+    background-repeat: no-repeat;
+    background-size: 16px 12px;
+    padding-right: $spacing-xl;
+    appearance: none;
+  }
+  
+  &__error {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $error-color;
+    font-size: $font-size-sm;
+    
+    @include mobile-only {
+      font-size: $font-size-base;
+      margin-top: $spacing-sm;
+    }
+  }
+  
+  &__help {
+    display: block;
+    margin-top: $spacing-xs;
+    color: $text-muted;
+    font-size: $font-size-sm;
+    
+    @include mobile-only {
+      font-size: $font-size-base;
+      margin-top: $spacing-sm;
+    }
+  }
+  
+  &__actions {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-xl;
+    
+    // Mobile-first: stack vertically
+    flex-direction: column;
+    
+    @include tablet-up {
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+    
+    &--center {
+      @include tablet-up {
+        justify-content: center;
+      }
+    }
+    
+    &--start {
+      @include tablet-up {
+        justify-content: flex-start;
+      }
+    }
+  }
+}
+
+// Checkbox and Radio components
+.checkbox,
+.radio {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  cursor: pointer;
+  min-height: $touch-target-min;
+  
+  @include mobile-only {
+    gap: $spacing-md;
+    min-height: 48px;
+  }
+  
+  &__input {
+    margin: 0;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    cursor: pointer;
+    
+    @include mobile-only {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  
+  &__label {
+    flex: 1;
+    cursor: pointer;
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
+    
+    @include mobile-only {
+      font-size: $font-size-lg;
+    }
+  }
+  
+  &--disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    
+    .checkbox__input,
+    .radio__input,
+    .checkbox__label,
+    .radio__label {
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Input group (for input with buttons/icons)
+.input-group {
+  display: flex;
+  width: 100%;
+  
+  &__input {
+    @include input-base;
+    flex: 1;
+    border-radius: $border-radius-md 0 0 $border-radius-md;
+    border-right: none;
+    
+    &:focus {
+      z-index: 1;
+      position: relative;
+    }
+  }
+  
+  &__button {
+    @include button-base;
+    border-radius: 0 $border-radius-md $border-radius-md 0;
+    border-left: none;
+    background-color: $primary-color;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background-color: $primary-dark;
+    }
+  }
+  
+  &__addon {
+    display: flex;
+    align-items: center;
+    padding: $spacing-sm $spacing-md;
+    background-color: rgba($border-color, 0.1);
+    border: 1px solid $border-color;
+    border-left: none;
+    border-radius: 0 $border-radius-md $border-radius-md 0;
+    color: $text-muted;
+    font-size: $font-size-sm;
+    
+    @include mobile-only {
+      padding: $spacing-md $spacing-lg;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+// Search input
+.search {
+  position: relative;
+  
+  &__input {
+    @include input-base;
+    width: 100%;
+    padding-left: $spacing-xl;
+    
+    @include mobile-only {
+      padding-left: 48px;
+    }
+  }
+  
+  &__icon {
+    position: absolute;
+    left: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $text-muted;
+    pointer-events: none;
+    
+    @include mobile-only {
+      left: $spacing-lg;
+    }
+  }
+  
+  &__clear {
+    position: absolute;
+    right: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $text-muted;
+    cursor: pointer;
+    padding: $spacing-xs;
+    border-radius: $border-radius-sm;
+    
+    &:hover {
+      color: $text-primary;
+      background-color: rgba($border-color, 0.1);
+    }
+    
+    @include mobile-only {
+      right: $spacing-lg;
+      padding: $spacing-sm;
+    }
+  }
+}

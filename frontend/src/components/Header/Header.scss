@@ -1,0 +1,151 @@
+@use "../../styles/globals" as *;
+
+// Simple mobile-first Header styles
+
+.header {
+  background-color: $surface-color;
+  border-bottom: 1px solid $border-color;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: $spacing-sm 0;
+
+  @media (min-width: 641px) {
+    padding: $spacing-md 0;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-md;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    text-decoration: none;
+    color: $text-primary;
+    font-weight: bold;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+
+  &__logo-icon {
+    display: flex;
+    align-items: center;
+    color: $primary-color;
+  }
+
+  &__logo-image {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+
+    @media (min-width: 641px) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  &__logo-text {
+    font-size: 1rem;
+
+    @media (min-width: 641px) {
+      font-size: 1.25rem;
+    }
+
+    @media (max-width: 480px) {
+      display: none; // Hide text on very small screens
+    }
+  }
+
+  &__auth {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    @media (min-width: 641px) {
+      gap: $spacing-md;
+    }
+  }
+
+  &__user {
+    color: $text-secondary;
+    font-size: 0.875rem;
+    margin-right: $spacing-sm;
+
+    @media (max-width: 640px) {
+      display: none; // Hide username on mobile
+    }
+  }
+
+  &__logout-btn {
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: $text-primary;
+    min-height: 44px; // Touch-friendly
+
+    &:hover {
+      background-color: #e5e7eb;
+    }
+  }
+
+  &__auth-link {
+    padding: $spacing-sm $spacing-md;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    min-height: 44px; // Touch-friendly
+    display: flex;
+    align-items: center;
+
+    &:first-child {
+      color: $text-primary;
+      border: 1px solid $border-color;
+
+      &:hover {
+        background-color: #f9fafb;
+        text-decoration: none;
+      }
+    }
+
+    &--primary {
+      background-color: $primary-color;
+      color: white;
+      border: 1px solid $primary-color;
+
+      &:hover {
+        background-color: #1d4ed8;
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+}
+
+// Mobile-specific optimizations
+@media (max-width: 640px) {
+  .header {
+    // Better touch feedback
+    * {
+      -webkit-tap-highlight-color: rgba($primary-color, 0.1);
+    }
+
+    // Prevent zoom on button focus
+    button, a {
+      font-size: 16px !important;
+    }
+  }
+}

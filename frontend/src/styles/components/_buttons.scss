@@ -1,0 +1,134 @@
+@use "../globals" as *;
+
+// BEM Button Components
+// Mobile-first, touch-friendly button styles
+
+// Base button block
+.btn {
+  @include button-base;
+  
+  // Button modifiers
+  &--primary {
+    @include button-primary;
+  }
+  
+  &--secondary {
+    @include button-secondary;
+  }
+  
+  &--danger {
+    @include button-danger;
+  }
+  
+  &--success {
+    background-color: $success-color;
+    color: white;
+    
+    &:hover:not(:disabled) {
+      background-color: darken($success-color, 10%);
+    }
+    
+    &:active:not(:disabled) {
+      background-color: darken($success-color, 15%);
+      transform: scale(0.98);
+    }
+  }
+  
+  // Button sizes
+  &--small {
+    min-height: 36px;
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+    
+    @include mobile-only {
+      min-height: 40px;
+      padding: $spacing-sm $spacing-md;
+    }
+  }
+  
+  &--large {
+    min-height: 56px;
+    padding: $spacing-lg $spacing-xl;
+    font-size: $font-size-lg;
+    
+    @include mobile-only {
+      min-height: 60px;
+      padding: $spacing-xl $spacing-2xl;
+      font-size: $font-size-xl;
+    }
+  }
+  
+  // Button states
+  &--loading {
+    position: relative;
+    color: transparent;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid transparent;
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: btn-loading 1s linear infinite;
+    }
+  }
+  
+  // Button with icon
+  &__icon {
+    margin-right: $spacing-sm;
+    
+    &--right {
+      margin-right: 0;
+      margin-left: $spacing-sm;
+    }
+    
+    &--only {
+      margin: 0;
+    }
+  }
+  
+  // Full width button (mobile-first)
+  &--full-width {
+    width: 100%;
+    
+    @include tablet-up {
+      width: auto;
+    }
+  }
+}
+
+// Button group
+.btn-group {
+  display: flex;
+  gap: $spacing-sm;
+  
+  // Mobile-first: stack vertically
+  flex-direction: column;
+  
+  @include tablet-up {
+    flex-direction: row;
+  }
+  
+  &--horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  &--vertical {
+    flex-direction: column;
+  }
+}
+
+@keyframes btn-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

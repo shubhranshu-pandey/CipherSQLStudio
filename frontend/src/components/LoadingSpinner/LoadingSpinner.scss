@@ -1,0 +1,53 @@
+@use "../../styles/globals" as *;
+
+.loading-spinner-container {
+  @include flex-center;
+  @include flex-column;
+  gap: $spacing-md;
+  padding: $spacing-xl;
+}
+
+.loading-spinner {
+  display: inline-block;
+  position: relative;
+
+  &--small {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--medium {
+    width: 32px;
+    height: 32px;
+  }
+
+  &--large {
+    width: 48px;
+    height: 48px;
+  }
+
+  &__circle {
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top: 2px solid $primary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.loading-spinner__text {
+  color: $text-secondary;
+  font-size: $font-size-sm;
+  margin: 0;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

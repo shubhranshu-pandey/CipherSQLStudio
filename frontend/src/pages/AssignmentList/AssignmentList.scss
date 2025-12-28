@@ -1,0 +1,460 @@
+// Mobile-first responsive styles for AssignmentList
+// Simple approach without complex dependencies
+
+// Mobile-first breakpoints
+$mobile: 320px;
+$tablet: 641px;
+$desktop: 1024px;
+$large: 1281px;
+
+// Colors and spacing
+$primary-color: #000000;
+$text-primary: #000000;
+$text-secondary: #666666;
+$background-color: #ffffff;
+$surface-color: #ffffff;
+$border-color: #e5e5e5;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+.assignment-list {
+  padding: $spacing-md 0;
+
+  @media (min-width: $tablet) {
+    padding: $spacing-lg 0;
+  }
+
+  @media (min-width: $desktop) {
+    padding: $spacing-xl 0;
+  }
+
+  &__loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+
+  &__error {
+    max-width: 500px;
+    margin: $spacing-xl auto;
+    padding: $spacing-lg;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    text-align: center;
+
+    h2 {
+      color: #dc2626;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: #7f1d1d;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__retry-btn {
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    min-height: 44px; // Touch-friendly
+
+    &:hover {
+      background-color: #b91c1c;
+    }
+  }
+
+  &__header {
+    margin-bottom: $spacing-xl;
+
+    @media (min-width: $desktop) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__title-section {
+    text-align: center;
+    margin-bottom: $spacing-lg;
+
+    @media (min-width: $tablet) {
+      text-align: left;
+    }
+
+    h1 {
+      font-size: 1.875rem; // Larger on mobile
+      font-weight: bold;
+      color: $text-primary;
+      margin-bottom: $spacing-sm;
+
+      @media (min-width: $tablet) {
+        font-size: 2.25rem;
+      }
+
+      @media (min-width: $desktop) {
+        font-size: 3rem;
+      }
+    }
+
+    p {
+      color: $text-secondary;
+      font-size: 1rem;
+
+      @media (min-width: $tablet) {
+        font-size: 1.125rem;
+      }
+    }
+  }
+
+  &__filters {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    @media (min-width: $tablet) {
+      flex-direction: row;
+      align-items: center;
+      gap: $spacing-lg;
+    }
+  }
+
+  &__filter-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text-secondary;
+
+    @media (max-width: #{$tablet - 1px}) {
+      display: none; // Hide on mobile to save space
+    }
+  }
+
+  &__difficulty-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+
+    @media (min-width: $tablet) {
+      gap: $spacing-md;
+    }
+  }
+
+  &__filter-btn {
+    flex: 1;
+    min-width: 0;
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    padding: $spacing-sm;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 44px; // Touch-friendly
+
+    @media (min-width: $tablet) {
+      flex: none;
+      min-width: auto;
+      padding: $spacing-sm $spacing-md;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+      background-color: rgba($primary-color, 0.05);
+    }
+
+    &--active {
+      border-color: $primary-color;
+      background-color: rgba($primary-color, 0.1);
+      transform: scale(1.02);
+    }
+  }
+
+  &__clear-filter {
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+    font-size: 0.875rem;
+    min-height: 44px; // Touch-friendly
+
+    &:hover {
+      background: #e5e7eb;
+    }
+  }
+
+  // Grid layout - mobile-first
+  &__grid {
+    display: grid;
+    gap: $spacing-md;
+    grid-template-columns: 1fr; // Single column on mobile
+    margin-bottom: $spacing-xl;
+
+    @media (min-width: $tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-lg;
+    }
+
+    @media (min-width: $desktop) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-xl;
+    }
+
+    @media (min-width: $large) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-xl;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    margin: $spacing-xl 0;
+
+    h3 {
+      color: $text-primary;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      color: $text-secondary;
+    }
+  }
+
+  &__loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+}
+
+// Assignment Card
+.assignment-card {
+  display: block;
+  background-color: $surface-color;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: $spacing-lg;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $spacing-md;
+    margin-bottom: $spacing-md;
+
+    @media (min-width: $tablet) {
+      align-items: center;
+    }
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1.4;
+    margin: 0;
+
+    @media (min-width: $tablet) {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__description {
+    color: $text-secondary;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: $spacing-lg;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    @media (min-width: $tablet) {
+      font-size: 1rem;
+      -webkit-line-clamp: 2;
+    }
+  }
+
+  &__footer {
+    margin-top: auto;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    @media (min-width: $tablet) {
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    &--more {
+      background-color: rgba($text-secondary, 0.1);
+      color: $text-secondary;
+    }
+  }
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: $spacing-xl;
+  flex-wrap: wrap;
+
+  &__btn {
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+    font-size: 0.875rem;
+    min-height: 44px; // Touch-friendly
+    min-width: 80px;
+
+    @media (max-width: #{$tablet - 1px}) {
+      flex: 1;
+      max-width: 120px;
+    }
+
+    &:hover:not(:disabled) {
+      border-color: $primary-color;
+      background-color: rgba($primary-color, 0.05);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__numbers {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (max-width: #{$tablet - 1px}) {
+      order: -1;
+      width: 100%;
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  &__number {
+    background: white;
+    border: 1px solid $border-color;
+    border-radius: 6px;
+    padding: $spacing-sm;
+    cursor: pointer;
+    font-size: 0.875rem;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: #{$tablet - 1px}) {
+      min-width: 36px;
+      min-height: 36px;
+      font-size: 0.75rem;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+      background-color: rgba($primary-color, 0.05);
+    }
+
+    &--active {
+      background-color: $primary-color;
+      color: white;
+      border-color: $primary-color;
+    }
+  }
+
+  &__ellipsis {
+    display: flex;
+    align-items: center;
+    padding: 0 $spacing-sm;
+    color: $text-secondary;
+    font-size: 0.875rem;
+  }
+}
+
+// Mobile-specific optimizations
+@media (max-width: #{$tablet - 1px}) {
+  .assignment-list {
+    // Improve touch scrolling
+    -webkit-overflow-scrolling: touch;
+
+    // Better touch feedback
+    * {
+      -webkit-tap-highlight-color: rgba($primary-color, 0.1);
+    }
+
+    // Prevent zoom on input focus
+    input, textarea, select, button {
+      font-size: 16px !important;
+    }
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .assignment-card {
+    &:hover {
+      transform: none;
+    }
+
+    &:active {
+      transform: none;
+    }
+  }
+}

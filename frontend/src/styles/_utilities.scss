@@ -1,0 +1,510 @@
+@use "globals" as *;
+
+// Mobile-first Utility Classes
+// Touch-friendly and responsive utility classes
+
+// Text utilities
+.text {
+  &--center {
+    text-align: center;
+  }
+  
+  &--left {
+    text-align: left;
+  }
+  
+  &--right {
+    text-align: right;
+  }
+  
+  &--justify {
+    text-align: justify;
+  }
+  
+  // Font sizes (mobile-first)
+  &--xs {
+    font-size: $font-size-sm;
+    
+    @include mobile-only {
+      font-size: $font-size-base;
+    }
+  }
+  
+  &--sm {
+    font-size: $font-size-base;
+    
+    @include mobile-only {
+      font-size: $font-size-lg;
+    }
+  }
+  
+  &--base {
+    font-size: $font-size-lg;
+    
+    @include tablet-up {
+      font-size: $font-size-base;
+    }
+  }
+  
+  &--lg {
+    font-size: $font-size-xl;
+    
+    @include tablet-up {
+      font-size: $font-size-lg;
+    }
+  }
+  
+  &--xl {
+    font-size: $font-size-2xl;
+    
+    @include tablet-up {
+      font-size: $font-size-xl;
+    }
+  }
+  
+  // Font weights
+  &--normal {
+    font-weight: $font-weight-normal;
+  }
+  
+  &--medium {
+    font-weight: $font-weight-medium;
+  }
+  
+  &--semibold {
+    font-weight: $font-weight-semibold;
+  }
+  
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+  
+  // Text colors
+  &--primary {
+    color: $text-primary;
+  }
+  
+  &--secondary {
+    color: $text-secondary;
+  }
+  
+  &--muted {
+    color: $text-muted;
+  }
+  
+  &--success {
+    color: $success-color;
+  }
+  
+  &--warning {
+    color: $warning-color;
+  }
+  
+  &--error {
+    color: $error-color;
+  }
+  
+  &--info {
+    color: $info-color;
+  }
+  
+  // Text truncation
+  &--truncate {
+    @include text-truncate;
+  }
+  
+  &--clamp-2 {
+    @include text-clamp(2);
+  }
+  
+  &--clamp-3 {
+    @include text-clamp(3);
+  }
+}
+
+// Background utilities
+.bg {
+  &--primary {
+    background-color: $primary-color;
+    color: white;
+  }
+  
+  &--secondary {
+    background-color: $secondary-color;
+    color: white;
+  }
+  
+  &--success {
+    background-color: $success-color;
+    color: white;
+  }
+  
+  &--warning {
+    background-color: $warning-color;
+    color: white;
+  }
+  
+  &--error {
+    background-color: $error-color;
+    color: white;
+  }
+  
+  &--surface {
+    background-color: $surface-color;
+  }
+  
+  &--background {
+    background-color: $background-color;
+  }
+  
+  // Light backgrounds
+  &--primary-light {
+    background-color: rgba($primary-color, 0.1);
+    color: $primary-color;
+  }
+  
+  &--success-light {
+    background-color: rgba($success-color, 0.1);
+    color: $success-color;
+  }
+  
+  &--warning-light {
+    background-color: rgba($warning-color, 0.1);
+    color: $warning-color;
+  }
+  
+  &--error-light {
+    background-color: rgba($error-color, 0.1);
+    color: $error-color;
+  }
+}
+
+// Border utilities
+.border {
+  border: 1px solid $border-color;
+  
+  &--none {
+    border: none;
+  }
+  
+  &--top {
+    border-top: 1px solid $border-color;
+  }
+  
+  &--bottom {
+    border-bottom: 1px solid $border-color;
+  }
+  
+  &--left {
+    border-left: 1px solid $border-color;
+  }
+  
+  &--right {
+    border-right: 1px solid $border-color;
+  }
+  
+  // Border colors
+  &--primary {
+    border-color: $primary-color;
+  }
+  
+  &--success {
+    border-color: $success-color;
+  }
+  
+  &--warning {
+    border-color: $warning-color;
+  }
+  
+  &--error {
+    border-color: $error-color;
+  }
+}
+
+// Border radius utilities
+.rounded {
+  border-radius: $border-radius-md;
+  
+  &--none {
+    border-radius: 0;
+  }
+  
+  &--sm {
+    border-radius: $border-radius-sm;
+  }
+  
+  &--lg {
+    border-radius: $border-radius-lg;
+  }
+  
+  &--xl {
+    border-radius: $border-radius-xl;
+  }
+  
+  &--full {
+    border-radius: 50%;
+  }
+}
+
+// Shadow utilities
+.shadow {
+  box-shadow: $shadow-sm;
+  
+  &--none {
+    box-shadow: none;
+  }
+  
+  &--sm {
+    box-shadow: $shadow-sm;
+  }
+  
+  &--md {
+    box-shadow: $shadow-md;
+  }
+  
+  &--lg {
+    box-shadow: $shadow-lg;
+  }
+  
+  &--xl {
+    box-shadow: $shadow-xl;
+  }
+}
+
+// Width utilities (mobile-first)
+.w {
+  &--full {
+    width: 100%;
+  }
+  
+  &--auto {
+    width: auto;
+  }
+  
+  &--fit {
+    width: fit-content;
+  }
+  
+  // Responsive widths
+  &--mobile-full {
+    width: 100%;
+    
+    @include tablet-up {
+      width: auto;
+    }
+  }
+  
+  &--tablet-full {
+    @include tablet-up {
+      width: 100%;
+    }
+  }
+}
+
+// Height utilities
+.h {
+  &--full {
+    height: 100%;
+  }
+  
+  &--screen {
+    height: 100vh;
+  }
+  
+  &--auto {
+    height: auto;
+  }
+  
+  &--fit {
+    height: fit-content;
+  }
+}
+
+// Position utilities
+.position {
+  &--relative {
+    position: relative;
+  }
+  
+  &--absolute {
+    position: absolute;
+  }
+  
+  &--fixed {
+    position: fixed;
+  }
+  
+  &--sticky {
+    position: sticky;
+  }
+}
+
+// Z-index utilities
+.z {
+  &--dropdown {
+    z-index: $z-dropdown;
+  }
+  
+  &--sticky {
+    z-index: $z-sticky;
+  }
+  
+  &--fixed {
+    z-index: $z-fixed;
+  }
+  
+  &--modal-backdrop {
+    z-index: $z-modal-backdrop;
+  }
+  
+  &--modal {
+    z-index: $z-modal;
+  }
+  
+  &--popover {
+    z-index: $z-popover;
+  }
+  
+  &--tooltip {
+    z-index: $z-tooltip;
+  }
+}
+
+// Overflow utilities
+.overflow {
+  &--hidden {
+    overflow: hidden;
+  }
+  
+  &--auto {
+    overflow: auto;
+  }
+  
+  &--scroll {
+    overflow: scroll;
+  }
+  
+  &--x-hidden {
+    overflow-x: hidden;
+  }
+  
+  &--y-hidden {
+    overflow-y: hidden;
+  }
+  
+  &--x-auto {
+    overflow-x: auto;
+  }
+  
+  &--y-auto {
+    overflow-y: auto;
+  }
+}
+
+// Touch-friendly interactive utilities
+.interactive {
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  &--hover {
+    transition: all 0.2s ease-in-out;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+  }
+}
+
+// Loading states
+.loading {
+  @include skeleton;
+  
+  &--pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Screen reader only
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Focus utilities for accessibility
+.focus {
+  &--visible {
+    &:focus-visible {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+  }
+  
+  &--ring {
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+    }
+  }
+}
+
+// Mobile-first gap utilities
+.gap {
+  &--xs {
+    gap: $spacing-xs;
+  }
+  
+  &--sm {
+    gap: $spacing-sm;
+  }
+  
+  &--md {
+    gap: $spacing-md;
+  }
+  
+  &--lg {
+    gap: $spacing-lg;
+  }
+  
+  &--xl {
+    gap: $spacing-xl;
+  }
+  
+  // Responsive gaps
+  &--mobile-lg {
+    gap: $spacing-lg;
+    
+    @include tablet-up {
+      gap: $spacing-md;
+    }
+  }
+  
+  &--tablet-lg {
+    gap: $spacing-sm;
+    
+    @include tablet-up {
+      gap: $spacing-lg;
+    }
+  }
+}

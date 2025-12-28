@@ -1,0 +1,65 @@
+@use "../../styles/globals" as *;
+
+.footer {
+  background-color: $surface-color;
+  border-top: 1px solid $border-color;
+  padding: $spacing-lg 0;
+  margin-top: auto;
+
+  &__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+
+  &__text {
+    margin: 0;
+    color: $text-secondary;
+    font-size: $font-size-sm;
+  }
+
+  &__name {
+    color: $text-primary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: $text-secondary;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: $primary-color;
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+      border-radius: $border-radius-sm;
+    }
+
+    svg {
+      color: $text-secondary;
+      transition: color 0.2s ease-in-out;
+    }
+
+    &:hover svg {
+      color: $primary-color;
+    }
+  }
+}
+

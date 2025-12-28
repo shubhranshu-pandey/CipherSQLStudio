@@ -1,0 +1,400 @@
+@use "../globals" as *;
+
+// BEM Layout Components
+// Mobile-first responsive layout utilities
+
+// Main layout container
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  &__header {
+    flex-shrink: 0;
+  }
+  
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+    @include desktop-up {
+      flex-direction: row;
+    }
+  }
+  
+  &__sidebar {
+    flex-shrink: 0;
+    
+    @include desktop-up {
+      width: 240px;
+    }
+    
+    @include large-up {
+      width: 280px;
+    }
+  }
+  
+  &__content {
+    flex: 1;
+    padding: $spacing-lg;
+    
+    @include mobile-only {
+      padding: $spacing-md;
+    }
+    
+    @include desktop-up {
+      padding: $spacing-xl;
+    }
+  }
+  
+  &__footer {
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+}
+
+// Grid system
+.grid {
+  display: grid;
+  gap: $spacing-md;
+  
+  @include tablet-up {
+    gap: $spacing-lg;
+  }
+  
+  @include desktop-up {
+    gap: $spacing-xl;
+  }
+  
+  // Grid columns
+  &--1-col {
+    grid-template-columns: 1fr;
+  }
+  
+  &--2-col {
+    grid-template-columns: 1fr;
+    
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  &--3-col {
+    grid-template-columns: 1fr;
+    
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  &--4-col {
+    grid-template-columns: 1fr;
+    
+    @include tablet-up {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include desktop-up {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include large-up {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  // Auto-fit columns
+  &--auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    
+    @include mobile-only {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &--auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    
+    @include mobile-only {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Flexbox utilities
+.flex {
+  display: flex;
+  
+  &--column {
+    flex-direction: column;
+  }
+  
+  &--row {
+    flex-direction: row;
+  }
+  
+  &--wrap {
+    flex-wrap: wrap;
+  }
+  
+  &--nowrap {
+    flex-wrap: nowrap;
+  }
+  
+  // Alignment
+  &--center {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &--between {
+    justify-content: space-between;
+  }
+  
+  &--around {
+    justify-content: space-around;
+  }
+  
+  &--evenly {
+    justify-content: space-evenly;
+  }
+  
+  &--start {
+    justify-content: flex-start;
+  }
+  
+  &--end {
+    justify-content: flex-end;
+  }
+  
+  &--items-center {
+    align-items: center;
+  }
+  
+  &--items-start {
+    align-items: flex-start;
+  }
+  
+  &--items-end {
+    align-items: flex-end;
+  }
+  
+  &--items-stretch {
+    align-items: stretch;
+  }
+  
+  // Mobile-first responsive flex
+  &--mobile-column {
+    flex-direction: column;
+    
+    @include tablet-up {
+      flex-direction: row;
+    }
+  }
+  
+  &--mobile-wrap {
+    flex-wrap: wrap;
+    
+    @include tablet-up {
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+// Section spacing
+.section {
+  padding: $spacing-xl 0;
+  
+  @include mobile-only {
+    padding: $spacing-lg 0;
+  }
+  
+  @include desktop-up {
+    padding: $spacing-3xl 0;
+  }
+  
+  &--small {
+    padding: $spacing-lg 0;
+    
+    @include mobile-only {
+      padding: $spacing-md 0;
+    }
+    
+    @include desktop-up {
+      padding: $spacing-xl 0;
+    }
+  }
+  
+  &--large {
+    padding: $spacing-3xl 0;
+    
+    @include mobile-only {
+      padding: $spacing-xl 0;
+    }
+    
+    @include desktop-up {
+      padding: 6rem 0;
+    }
+  }
+}
+
+// Content width constraints
+.content {
+  &--narrow {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  &--medium {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  &--wide {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+// Spacing utilities
+.spacing {
+  &--none {
+    margin: 0 !important;
+  }
+  
+  &--xs {
+    margin: $spacing-xs;
+  }
+  
+  &--sm {
+    margin: $spacing-sm;
+  }
+  
+  &--md {
+    margin: $spacing-md;
+  }
+  
+  &--lg {
+    margin: $spacing-lg;
+  }
+  
+  &--xl {
+    margin: $spacing-xl;
+  }
+  
+  // Margin utilities
+  &--mt-xs { margin-top: $spacing-xs; }
+  &--mt-sm { margin-top: $spacing-sm; }
+  &--mt-md { margin-top: $spacing-md; }
+  &--mt-lg { margin-top: $spacing-lg; }
+  &--mt-xl { margin-top: $spacing-xl; }
+  
+  &--mb-xs { margin-bottom: $spacing-xs; }
+  &--mb-sm { margin-bottom: $spacing-sm; }
+  &--mb-md { margin-bottom: $spacing-md; }
+  &--mb-lg { margin-bottom: $spacing-lg; }
+  &--mb-xl { margin-bottom: $spacing-xl; }
+  
+  &--ml-xs { margin-left: $spacing-xs; }
+  &--ml-sm { margin-left: $spacing-sm; }
+  &--ml-md { margin-left: $spacing-md; }
+  &--ml-lg { margin-left: $spacing-lg; }
+  &--ml-xl { margin-left: $spacing-xl; }
+  
+  &--mr-xs { margin-right: $spacing-xs; }
+  &--mr-sm { margin-right: $spacing-sm; }
+  &--mr-md { margin-right: $spacing-md; }
+  &--mr-lg { margin-right: $spacing-lg; }
+  &--mr-xl { margin-right: $spacing-xl; }
+  
+  // Padding utilities
+  &--pt-xs { padding-top: $spacing-xs; }
+  &--pt-sm { padding-top: $spacing-sm; }
+  &--pt-md { padding-top: $spacing-md; }
+  &--pt-lg { padding-top: $spacing-lg; }
+  &--pt-xl { padding-top: $spacing-xl; }
+  
+  &--pb-xs { padding-bottom: $spacing-xs; }
+  &--pb-sm { padding-bottom: $spacing-sm; }
+  &--pb-md { padding-bottom: $spacing-md; }
+  &--pb-lg { padding-bottom: $spacing-lg; }
+  &--pb-xl { padding-bottom: $spacing-xl; }
+  
+  &--pl-xs { padding-left: $spacing-xs; }
+  &--pl-sm { padding-left: $spacing-sm; }
+  &--pl-md { padding-left: $spacing-md; }
+  &--pl-lg { padding-left: $spacing-lg; }
+  &--pl-xl { padding-left: $spacing-xl; }
+  
+  &--pr-xs { padding-right: $spacing-xs; }
+  &--pr-sm { padding-right: $spacing-sm; }
+  &--pr-md { padding-right: $spacing-md; }
+  &--pr-lg { padding-right: $spacing-lg; }
+  &--pr-xl { padding-right: $spacing-xl; }
+}
+
+// Responsive visibility utilities
+.show {
+  &--mobile-only {
+    display: block;
+    
+    @include tablet-up {
+      display: none !important;
+    }
+  }
+  
+  &--tablet-up {
+    display: none;
+    
+    @include tablet-up {
+      display: block;
+    }
+  }
+  
+  &--desktop-up {
+    display: none;
+    
+    @include desktop-up {
+      display: block;
+    }
+  }
+  
+  &--large-up {
+    display: none;
+    
+    @include large-up {
+      display: block;
+    }
+  }
+}
+
+.hide {
+  &--mobile-only {
+    @include mobile-only {
+      display: none !important;
+    }
+  }
+  
+  &--tablet-up {
+    @include tablet-up {
+      display: none !important;
+    }
+  }
+  
+  &--desktop-up {
+    @include desktop-up {
+      display: none !important;
+    }
+  }
+  
+  &--large-up {
+    @include large-up {
+      display: none !important;
+    }
+  }
+}

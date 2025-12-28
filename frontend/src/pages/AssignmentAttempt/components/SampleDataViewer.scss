@@ -1,0 +1,222 @@
+@use "../../../styles/globals" as *;
+
+.sample-data-viewer {
+  @include panel;
+  height: fit-content;
+
+  &__header {
+    @include panel-header;
+    @include flex-between;
+    align-items: center;
+    
+    h2 {
+      margin: 0;
+      font-size: $font-size-lg;
+      color: $text-primary;
+    }
+  }
+
+  &__table-selector {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__table-select {
+    padding: $spacing-xs $spacing-sm;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-sm;
+    background-color: $surface-color;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    min-width: 120px;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &__content {
+    @include panel-content;
+    @include custom-scrollbar;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  &__empty {
+    text-align: center;
+    padding: $spacing-xl;
+    color: $text-muted;
+  }
+
+  &__table-info {
+    @include flex-between;
+    align-items: center;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid $border-color;
+
+    h3 {
+      margin: 0;
+      font-size: $font-size-lg;
+      color: $text-primary;
+      font-family: $font-family-mono;
+    }
+  }
+
+  &__row-count {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    background-color: rgba($secondary-color, 0.1);
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+  }
+
+  &__schema,
+  &__sample-rows {
+    margin-bottom: $spacing-lg;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h4 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $text-primary;
+      margin: 0 0 $spacing-sm 0;
+    }
+  }
+
+  &__schema-table,
+  &__data-table {
+    overflow-x: auto;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-md;
+
+    table {
+      width: 100%;
+      margin: 0;
+      border-collapse: collapse;
+
+      th {
+        background-color: $background-color;
+        color: $text-primary;
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-sm;
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid $border-color;
+        text-align: left;
+        white-space: nowrap;
+
+        &:not(:last-child) {
+          border-right: 1px solid $border-color;
+        }
+      }
+
+      td {
+        padding: $spacing-sm $spacing-md;
+        border-bottom: 1px solid rgba($border-color, 0.5);
+        font-size: $font-size-sm;
+        color: $text-secondary;
+        vertical-align: top;
+
+        &:not(:last-child) {
+          border-right: 1px solid rgba($border-color, 0.5);
+        }
+
+        code {
+          background-color: rgba($primary-color, 0.1);
+          color: $primary-color;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius-sm;
+          font-size: $font-size-xs;
+          font-weight: $font-weight-medium;
+        }
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+    }
+  }
+
+  &__data-type {
+    font-family: $font-family-mono;
+    font-size: $font-size-xs;
+    background-color: rgba($secondary-color, 0.1);
+    color: $secondary-color;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    white-space: nowrap;
+  }
+
+  &__nullable {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+    text-transform: uppercase;
+
+    &--yes {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: $warning-color;
+    }
+
+    &--no {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: $success-color;
+    }
+  }
+
+  &__null-value {
+    font-style: italic;
+    color: $text-muted;
+    font-size: $font-size-xs;
+  }
+
+  &__sample-note {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    margin: $spacing-sm 0 0 0;
+    text-align: center;
+    font-style: italic;
+  }
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-tablet) {
+    &__header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: $spacing-sm;
+    }
+
+    &__table-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-xs;
+    }
+
+    &__content {
+      padding: $spacing-md;
+      max-height: 400px;
+    }
+
+    &__schema-table,
+    &__data-table {
+      font-size: $font-size-xs;
+
+      table {
+        th, td {
+          padding: $spacing-xs $spacing-sm;
+        }
+      }
+    }
+  }
+}

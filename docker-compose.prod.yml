@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  # PostgreSQL Database (SQL Sandbox)
+  postgres:
+    image: postgres:15-alpine
+    container_name: ciphersql-postgres-prod
+    environment:
+      POSTGRES_DB: sqlstudio_sandbox
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5544:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/src/scripts/setupPostgresSchema.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Frontend (connects to Vercel backend)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: https://cipher-sql-studio-assignment-qikk-c8l2ris8x.vercel.app/api
+    container_name: ciphersql-frontend-prod
+    ports:
+      - "3330:80"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  default:
+    name: ciphersql-network

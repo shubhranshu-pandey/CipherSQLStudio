@@ -1,0 +1,41 @@
+@use 'globals' as *;
+@use 'base';
+
+// Import order is important
+// Import BEM component styles
+@use 'components/layout';
+@use 'components/buttons';
+@use 'components/forms';
+@use 'components/cards';
+@use 'components/navigation';
+@use 'components/assignment-workspace';
+
+// Import utilities last
+@use 'utilities';
+
+// App-specific styles with mobile-first approach
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__main {
+    flex: 1;
+    
+    // Mobile-first padding
+    padding: $spacing-md 0;
+    
+    @include tablet-up {
+      padding: $spacing-lg 0;
+    }
+    
+    @include desktop-up {
+      padding: $spacing-xl 0;
+    }
+  }
+  
+  // Mobile-first responsive adjustments
+  @include mobile-only {
+    font-size: $font-size-lg;
+  }
+}

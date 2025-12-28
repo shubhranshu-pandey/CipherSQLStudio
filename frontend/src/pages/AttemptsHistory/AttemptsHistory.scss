@@ -1,0 +1,284 @@
+@use "../../styles/globals" as *;
+
+.attempts-history {
+  min-height: calc(100vh - 200px);
+  padding: $spacing-xl 0;
+
+  &__header {
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    color: $primary-color;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    margin-bottom: $spacing-lg;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      text-decoration: underline;
+      color: $primary-dark;
+    }
+  }
+
+  &__title-section {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__title-row {
+    @include flex-center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+    margin-bottom: $spacing-sm;
+
+    h1 {
+      margin: 0;
+      color: $text-primary;
+    }
+  }
+
+  &__subtitle {
+    color: $text-secondary;
+    font-size: $font-size-lg;
+    margin: 0;
+  }
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: $spacing-md;
+    margin-top: $spacing-xl;
+  }
+
+  &__stat-card {
+    @include card;
+    padding: $spacing-lg;
+    text-align: center;
+  }
+
+  &__stat-label {
+    display: block;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__stat-value {
+    display: block;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+
+    &--success {
+      color: $success-color;
+    }
+  }
+
+  &__content {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__empty {
+    @include card;
+    text-align: center;
+    padding: $spacing-3xl;
+
+    &-icon {
+      color: $text-muted;
+      margin-bottom: $spacing-lg;
+    }
+
+    h3 {
+      color: $text-primary;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $text-secondary;
+      margin-bottom: $spacing-xl;
+    }
+  }
+
+  &__start-btn {
+    @include button-primary;
+    text-decoration: none;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__attempt {
+    @include card;
+    padding: $spacing-lg;
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: $shadow-lg;
+    }
+
+    &--success {
+      border-left-color: $success-color;
+    }
+
+    &--error {
+      border-left-color: $error-color;
+    }
+  }
+
+  &__attempt-header {
+    @include flex-between;
+    align-items: flex-start;
+    margin-bottom: $spacing-md;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__attempt-info {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+    flex: 1;
+  }
+
+  &__attempt-number {
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    font-size: $font-size-lg;
+  }
+
+  &__attempt-date {
+    font-size: $font-size-sm;
+    color: $text-muted;
+  }
+
+  &__attempt-status {
+    flex-shrink: 0;
+  }
+
+  &__status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+
+    &--success {
+      background-color: rgba($success-color, 0.1);
+      color: $success-color;
+    }
+
+    &--error {
+      background-color: rgba($error-color, 0.1);
+      color: $error-color;
+    }
+  }
+
+  &__attempt-meta {
+    display: flex;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+
+    svg {
+      color: $text-muted;
+    }
+  }
+
+  &__attempt-query {
+    margin-top: $spacing-md;
+    padding: $spacing-md;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: $border-radius-md;
+    border: 1px solid $border-color;
+  }
+
+  &__query-header {
+    margin-bottom: $spacing-sm;
+  }
+
+  &__query-label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__attempt-query pre {
+    margin: 0;
+    font-family: $font-family-mono;
+    font-size: $font-size-sm;
+    color: $text-primary;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    line-height: $line-height-relaxed;
+  }
+
+  &__attempt-error {
+    margin-top: $spacing-md;
+    padding: $spacing-md;
+    background-color: rgba($error-color, 0.05);
+    border-radius: $border-radius-md;
+    font-size: $font-size-sm;
+    color: $error-color;
+    line-height: $line-height-relaxed;
+
+    strong {
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__error {
+    @include card;
+    text-align: center;
+    padding: $spacing-3xl;
+    margin: $spacing-2xl 0;
+
+    h2 {
+      color: $error-color;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $text-secondary;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__back-btn {
+    @include button-primary;
+    text-decoration: none;
+  }
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-tablet) {
+    &__stats {
+      grid-template-columns: 1fr;
+    }
+
+    &__attempt-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+

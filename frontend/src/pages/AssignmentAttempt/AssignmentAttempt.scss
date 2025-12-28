@@ -1,0 +1,163 @@
+@use "../../styles/globals" as *;
+
+.assignment-attempt {
+  min-height: calc(100vh - 200px);
+
+  &__header {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin-bottom: $spacing-md;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-separator {
+      color: $text-muted;
+    }
+  }
+
+  &__title-section {
+    @include flex-between;
+    align-items: flex-start;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
+  }
+
+  &__title-row {
+    @include flex-center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+
+    h1 {
+      margin: 0;
+      color: $text-primary;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
+  &__hint-toggle {
+    @include button-secondary;
+    font-size: $font-size-sm;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    margin-bottom: $spacing-xl;
+
+    @include desktop {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__left-column {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+  }
+
+  &__right-column {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    min-height: 600px;
+  }
+
+  &__editor-section {
+    flex: 1;
+    min-height: 300px;
+  }
+
+  &__results-section {
+    flex: 1;
+    min-height: 300px;
+  }
+
+  &__hints {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-xl;
+    border-top: 1px solid $border-color;
+  }
+
+  &__error {
+    @include card;
+    text-align: center;
+    padding: $spacing-3xl;
+    margin: $spacing-2xl 0;
+
+    h2 {
+      color: $error-color;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      color: $text-secondary;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__back-btn {
+    @include button-primary;
+    text-decoration: none;
+  }
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-desktop) {
+    &__title-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    &__title-row {
+      justify-content: space-between;
+    }
+
+    &__actions {
+      justify-content: center;
+    }
+
+    &__content {
+      grid-template-columns: 1fr;
+    }
+
+    &__right-column {
+      min-height: auto;
+    }
+
+    &__editor-section,
+    &__results-section {
+      min-height: 250px;
+    }
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    &__title-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-sm;
+    }
+
+    &__breadcrumb {
+      flex-wrap: wrap;
+    }
+  }
+}
